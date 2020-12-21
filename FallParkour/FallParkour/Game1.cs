@@ -31,11 +31,10 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
             // TODO: use this.Content to load your game content here
 
             InitializeGameObjects();
-
-            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
         }
 
 

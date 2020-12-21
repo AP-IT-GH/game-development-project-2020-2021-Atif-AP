@@ -29,8 +29,6 @@ namespace FallParkour
 
         public void Update()
         {
-            animatie.Update();
-
             KeyboardState state = Keyboard.GetState();
 
             if(state.IsKeyDown(Keys.Right))
@@ -45,6 +43,8 @@ namespace FallParkour
             {
                 position.X += 10;
             }
+
+            animatie.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
