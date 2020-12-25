@@ -32,6 +32,8 @@ namespace FallParkour
 
         public void Initialize()
         {
+            position.X = 600;
+            position.Y = 600;
         }
 
         public void Update()

@@ -10,10 +10,11 @@ namespace FallParkour.Movement
     class playerMovement:IInputReader
     {
         Vector2 position, velocity;
-        const float jumpSpeed = 4f;
+        const float jumpSpeed = 100f;
         const float moveSpeed = 4f;
-        float gravity;
-        bool jump = false;
+        float gravity = 1f;
+        bool jump = true;
+
         public Vector2 ReadInput()
         {
             KeyboardState state = Keyboard.GetState();
@@ -27,30 +28,22 @@ namespace FallParkour.Movement
             }
             if (state.IsKeyDown(Keys.Left))
             {
-                velocity.X -= moveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                velocity.X -= moveSpeed;
             }
-            if (state.IsKeyDown(Keys.Up) && jump)
+            if (state.IsKeyDown(Keys.Up) && jump == true)
             {
-                velocity.Y = -jumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                velocity.Y -= jumpSpeed;
                 jump = false;
             }
 
-            if (!jump)
+            if (jump == false)
             {
-                velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                velocity.Y += 0.15f * gravity; 
             }
             else
             {
-                velocity.Y = 0;
-            }
-
-            velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            jump = position.Y >= 150;
-
-            if (jump)
-            {
-                position.Y = 150;
+                velocity.Y = position.Y;
+                jump = true;
             }
 
             return velocity;
