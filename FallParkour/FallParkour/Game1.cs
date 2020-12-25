@@ -50,7 +50,7 @@ namespace FallParkour
 
         private void InitializeGameObjects()
         {
-            player = new Player(texture, new playerMovement());
+            player = new Player(texture, new PlayerMovement());
             player.Initialize();
         }   
 

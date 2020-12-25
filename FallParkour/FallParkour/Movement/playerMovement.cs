@@ -7,9 +7,9 @@ using System.Text;
 
 namespace FallParkour.Movement
 {
-    class playerMovement:IInputReader
+    class PlayerMovement:IInputReader
     {
-        Vector2 position, velocity;
+        Vector2 velocity;
         const float jumpSpeed = 100f;
         const float moveSpeed = 4f;
         float gravity = 1f;
@@ -18,7 +18,6 @@ namespace FallParkour.Movement
         public Vector2 ReadInput()
         {
             KeyboardState state = Keyboard.GetState();
-            GameTime gameTime = new GameTime();
 
             velocity = Vector2.Zero;
 
@@ -38,11 +37,11 @@ namespace FallParkour.Movement
 
             if (jump == false)
             {
-                velocity.Y += 0.15f * gravity; 
+                velocity.Y += 0.30f * gravity;
             }
             else
             {
-                velocity.Y = position.Y;
+                velocity.Y = 0f;
                 jump = true;
             }
 
