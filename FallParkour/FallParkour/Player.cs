@@ -14,42 +14,41 @@ namespace FallParkour
         Texture2D heroTexture;
         Animatie animatie;
         Vector2 position;
+        IInputReader inputReader;
 
-        public Player(Texture2D texture)
+        public Player(Texture2D texture, IInputReader reader)
         {
             heroTexture = texture;
             animatie = new Animatie();
             animatie.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(32, 0, 32, 32)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(64, 0, 32, 32)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(96, 0, 32, 32)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(128, 0, 32, 32)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(140, 0, 32, 32)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(162, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(160, 0, 32, 32)));
+
+            this.inputReader = reader;
+        }
+
+        public void Initialize()
+        {
+            position.X = 600;
+            position.Y = 600;
         }
 
         public void Update()
         {
-            animatie.Update();
-
-            KeyboardState state = Keyboard.GetState();
-
-            if(state.IsKeyDown(Keys.Right))
+            var velocity = inputReader.ReadInput();
+            if (position != position + velocity)
             {
-                position.X += 10;
-            }
-            if (state.IsKeyDown(Keys.Left))
-            {
-                position.X -= 10;
-            }
-            if (state.IsKeyDown(Keys.Up))
-            {
-                position.X += 10;
+                position += velocity;
+                animatie.Update();
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(heroTexture, new Vector2(10, 10), animatie.CurrentFrame.SourceRectangle, Color.White);
+            spriteBatch.Draw(heroTexture, position, animatie.CurrentFrame.SourceRectangle, Color.White);
         }
     }
 }

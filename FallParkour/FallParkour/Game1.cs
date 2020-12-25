@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using FallParkour.Map;
 using System;
+using FallParkour.Movement;
 
 namespace FallParkour
 {
@@ -39,18 +40,18 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
             // TODO: use this.Content to load your game content here
 
             InitializeGameObjects();
-
-            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
         }
 
 
 
         private void InitializeGameObjects()
         {
-            player = new Player(texture);
+            player = new Player(texture, new PlayerMovement());
+            player.Initialize();
         }   
 
         protected override void Update(GameTime gameTime)
@@ -72,9 +73,8 @@ namespace FallParkour
 
             _spriteBatch.Begin();
 
-            //player.Draw(_spriteBatch);
+            player.Draw(_spriteBatch);
             level.DrawWorld(_spriteBatch);
-            _spriteBatch.Draw(texture, new Vector2(10, 10), new Rectangle(10, 10, 10, 10), Color.White);
 
             _spriteBatch.End();
 
