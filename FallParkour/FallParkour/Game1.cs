@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using FallParkour.Map;
 using System;
 
 namespace FallParkour
@@ -10,6 +11,8 @@ namespace FallParkour
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        LevelDesign level;
+
         private Texture2D texture;
         Player player;
 
@@ -18,11 +21,16 @@ namespace FallParkour
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.ApplyChanges();
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            level = new LevelDesign(Content);
+            level.CreateWorld();
 
             base.Initialize();
         }
@@ -42,7 +50,7 @@ namespace FallParkour
         private void InitializeGameObjects()
         {
             player = new Player(texture);
-        }
+        }   
 
         protected override void Update(GameTime gameTime)
         {
@@ -63,8 +71,9 @@ namespace FallParkour
 
             _spriteBatch.Begin();
 
-            player.Draw(_spriteBatch);
-            //_spriteBatch.Draw(texture, new Vector2(10, 10), new Rectangle(10, 10, 10, 10), Color.White);
+            //player.Draw(_spriteBatch);
+            level.DrawWorld(_spriteBatch);
+            _spriteBatch.Draw(texture, new Vector2(10, 10), new Rectangle(10, 10, 10, 10), Color.White);
 
             _spriteBatch.End();
 
