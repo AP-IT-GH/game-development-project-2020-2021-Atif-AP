@@ -11,15 +11,22 @@ namespace FallParkour.Map
     class LevelDesign
     {
         public Texture2D texture;
-        private Blok[,] blokArray = new Blok[4, 6];
+        private Blok[,] blokArray = new Blok[11, 10];
         private ContentManager content;
 
         public byte[,] tileArray = new Byte[,]
         {
-            {0,0,0,0,0,0 },
-            {0,0,0,0,0,0 },
-            {1,0,1,0,1,0 },
-            {0,1,0,1,0,1 },
+            {0,0,0,0,0,0,0,0,0,0 },
+            {0,1,0,0,0,0,0,0,0,0 },
+            {0,0,0,1,0,0,1,0,0,0 },
+            {0,0,0,0,0,0,0,0,0,0 },
+            {0,1,0,0,1,1,0,0,1,0 },
+            {0,0,0,0,0,0,0,0,0,0 },
+            {0,0,1,0,1,0,1,1,0,0 },
+            {0,0,0,0,0,0,0,0,0,0 },
+            {0,1,0,0,1,1,1,0,1,0 },
+            {0,0,0,0,0,0,0,0,0,0 },
+            {0,1,1,1,1,1,1,1,1,0 },
         };
 
         public LevelDesign (ContentManager content)
@@ -36,9 +43,9 @@ namespace FallParkour.Map
 
         public void CreateWorld()
         {
-            for (int x = 0; x < 4; x++)
+            for (int x = 0; x < 11; x++)
             {
-                for (int y = 0; y < 6; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     if (tileArray[x, y] == 1)
                     {
@@ -50,9 +57,9 @@ namespace FallParkour.Map
 
         public void DrawWorld(SpriteBatch spriteBatch)
         {
-            for (int x = 0; x < 4; x++)
+            for (int x = 0; x < 11; x++)
             {
-                for (int y = 0; y < 6; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     if (blokArray[x, y] != null)
                     {
