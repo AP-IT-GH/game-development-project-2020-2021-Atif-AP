@@ -1,0 +1,138 @@
+{
+  Color: {
+    RGBA_0_0_0_255: {
+      r: 0
+      g: 0
+      b: 0
+      a: 1
+    }
+    RGBA_255_255_255_255: {
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    }
+  }
+  CheckBoxStyle: {
+    default: {
+      checkboxOn: checkbox-pressed
+      checkboxOff: checkbox
+      fontColor: RGBA_0_0_0_255
+    }
+    shop-backdrop: {
+      checkboxOn: shop-backdrop-selected
+      checkboxOff: shop-backdrop
+    }
+  }
+  TextButtonStyle: {
+    default: {
+      fontColor: RGBA_0_0_0_255
+      up: button
+      down: button-pressed
+      over: button-hover
+    }
+    skull: {
+      fontColor: RGBA_255_255_255_255
+      up: skull
+      down: skull
+      over: skull
+    }
+    shop-backdrop: {
+      fontColor: RGBA_255_255_255_255
+      up: shop-backdrop
+      down: shop-backdrop-selected
+    }
+  }
+  ButtonStyle: {
+    default: {
+      up: button
+      down: button-pressed
+      over: button-hover
+    }
+    backward: {
+      up: backward
+      down: backward-pressed
+      over: backward-hover
+    }
+    close: {
+      up: close
+      down: close-pressed
+      over: close-hover
+    }
+    forward: {
+      up: forward
+      down: forward-pressed
+      over: forward-hover
+    }
+    shop-backdrop: {
+      up: shop-backdrop
+      down: shop-backdrop-selected
+    }
+    info: {
+      up: info
+      down: info-pressed
+      over: info-hover
+    }
+    music-off: {
+      up: music-off
+      down: music-off-pressed
+      over: music-off-hover
+    }
+    music-on: {
+      up: music-on
+      down: music-on-pressed
+      over: music-on-hover
+    }
+    ok: {
+      up: ok
+      down: ok-pressed
+      over: ok-hover
+    }
+    options: {
+      up: options
+      down: options-pressed
+      over: options-hover
+    }
+    pause: {
+      up: pause
+      down: pause-pressed
+      over: pause-hover
+    }
+    play: {
+      up: play
+      down: play-pressed
+      over: play-hover
+    }
+    replay: {
+      up: replay
+      down: replay-pressed
+      over: replay-hover
+    }
+    sound-off: {
+      up: sound-off
+      down: sound-off-pressed
+      over: sound-off-hover
+    }
+    sound-on: {
+      up: sound-on
+      down: sound-on-pressed
+      over: sound-on-hover
+    }
+    arrow-right: {
+        up: forward
+        down: forward-pressed
+        over: forward-hover
+    }
+    arrow-left: {
+        up: backward
+        down: backward-pressed
+        over: backward-hover
+    }
+  }
+  SliderStyle: {
+    default: {
+      background: scroll-bar
+      knob: scroll-dot
+    }
+  }
+}
