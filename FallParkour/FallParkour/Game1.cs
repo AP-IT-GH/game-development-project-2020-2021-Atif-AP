@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using FallParkour.Map;
 using System;
 using FallParkour.Movement;
+using FallParkour.States;
 
 namespace FallParkour
 {
@@ -11,6 +12,12 @@ namespace FallParkour
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        public static int ScreenWidth = 1920;
+        public static int ScreenHeight = 1080,
+
+        private State _currentState;
+        private State _nextState;
 
         LevelDesign level;
 
@@ -40,6 +47,10 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            _currentState = new SpriteBatch(GraphicsDevice);
+            _currentState.LoadContent();
+            _nextState = null;
+
             texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
             // TODO: use this.Content to load your game content here
 
@@ -58,18 +69,35 @@ namespace FallParkour
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if(_nextState != null)
+            {
+                _currentState = _nextState;
+                _currentState.LoadContent();
+
+                _nextState = null;
+            }
+            _currentState.Update(gameTime);
+
+            _currentState.PostUpdate(gameTime);
 
             // TODO: Add your update logic here
             player.Update();
 
             base.Update(gameTime);
-        }   
+        }
+
+        public void ChangeState(State state)
+        {
+            _nextState = state;
+        }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            _currentState.Draw(gameTime, _spriteBatch);
 
             _spriteBatch.Begin();
 
