@@ -9,5 +9,28 @@ namespace FallParkour.States
 {
     class GameState : State
     {
+        public GameState(Game1 game, ContentManager content) : base(game, content)
+        {
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void LoadContent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void PostUpdate(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

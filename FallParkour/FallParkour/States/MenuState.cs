@@ -15,7 +15,7 @@ namespace FallParkour.States
 
         private Texture2D menuBackGroundTexture;
 
-        public MenuState(Game1 game, ContentManager content)
+        public MenuState(Game1 game, GraphicsDeviceManager graphics, ContentManager content)
             : base(game, content)
         {
         }

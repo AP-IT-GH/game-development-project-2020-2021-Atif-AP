@@ -14,7 +14,7 @@ namespace FallParkour
         private SpriteBatch _spriteBatch;
 
         public static int ScreenWidth = 1920;
-        public static int ScreenHeight = 1080,
+        public static int ScreenHeight = 1080;
 
         private State _currentState;
         private State _nextState;
@@ -47,8 +47,7 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _currentState = new SpriteBatch(GraphicsDevice);
-            _currentState.LoadContent();
+            _currentState = new MenuState(this, _graphics, Content);
             _nextState = null;
 
             texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
@@ -72,7 +71,6 @@ namespace FallParkour
             if(_nextState != null)
             {
                 _currentState = _nextState;
-                _currentState.LoadContent();
 
                 _nextState = null;
             }
