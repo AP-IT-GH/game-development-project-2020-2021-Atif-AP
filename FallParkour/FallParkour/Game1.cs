@@ -58,7 +58,7 @@ namespace FallParkour
                         Up = Keys.Up,
                         Down = Keys.Down
                     },
-                    Position = new Vector2((float) _graphics.PreferredBackBufferWidth / 2, (float) _graphics.PreferredBackBufferHeight / 2),
+                    Position = new Vector2((float) _graphics.PreferredBackBufferWidth / 4, (float) _graphics.PreferredBackBufferHeight / 2 + 225),
                     Speed = 5,
                 }
             };
