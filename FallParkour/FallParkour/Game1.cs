@@ -5,6 +5,9 @@ using FallParkour.Map;
 using System;
 using FallParkour.Movement;
 using FallParkour.States;
+using FallParkour.Sprites;
+using System.Collections.Generic;
+using FallParkour.Models;
 
 namespace FallParkour
 {
@@ -23,6 +26,8 @@ namespace FallParkour
 
         private Texture2D texture;
         Player player;
+
+        private List<Sprite> _sprites;
 
         public Game1()
         {
@@ -46,9 +51,25 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            texture = Content.Load<Texture2D>("block_player2");
+
             _currentState = new MenuState(this, _graphics, Content);
 
-            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
+            _sprites = new List<Sprite>()
+            {
+                new Hero(texture)
+                {
+                    Input = new Input()
+                    {
+                        Left = Keys.Left,
+                        Right = Keys.Right,
+                        Up = Keys.Up,
+                        Down = Keys.Down
+                    },
+                    Position = new Vector2((float) _graphics.PreferredBackBufferWidth / 4, (float) _graphics.PreferredBackBufferHeight / 2 + 225),
+                    Speed = 5,
+                }
+            };
 
             InitializeGameObjects();
         }
@@ -69,13 +90,10 @@ namespace FallParkour
             {
                 _currentState = _nextState;
 
-                _nextState = null;
-            }
+            foreach (var sprite in _sprites)
+                sprite.Update(gameTime, _sprites);
             _currentState.Update(gameTime);
-
             _currentState.PostUpdate(gameTime);
-
-            player.Update();
 
             base.Update(gameTime);
         }
@@ -93,7 +111,8 @@ namespace FallParkour
 
             /*_spriteBatch.Begin();
 
-            player.Draw(_spriteBatch);
+            foreach (var sprite in _sprites)
+                sprite.Draw(_spriteBatch);
             level.DrawWorld(_spriteBatch);
 
             _spriteBatch.End();*/
