@@ -86,12 +86,13 @@ namespace FallParkour
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            if(_nextState != null)
+            if (_nextState != null)
             {
                 _currentState = _nextState;
 
-            foreach (var sprite in _sprites)
-                sprite.Update(gameTime, _sprites);
+                foreach (var sprite in _sprites)
+                    sprite.Update(gameTime, _sprites);
+            }
             _currentState.Update(gameTime);
             _currentState.PostUpdate(gameTime);
 
