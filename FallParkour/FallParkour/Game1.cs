@@ -4,6 +4,10 @@ using Microsoft.Xna.Framework.Input;
 using FallParkour.Map;
 using System;
 using FallParkour.Movement;
+using FallParkour.States;
+using FallParkour.Sprites;
+using System.Collections.Generic;
+using FallParkour.Models;
 
 namespace FallParkour
 {
@@ -12,10 +16,13 @@ namespace FallParkour
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        LevelDesign level;
+        public static int ScreenWidth;
+        public static int ScreenHeight;
 
-        private Texture2D texture;
-        Player player;
+        private State _currentState;
+        private State _nextState;
+
+        public static Texture2D texture;
 
         public Game1()
         {
@@ -29,9 +36,8 @@ namespace FallParkour
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            level = new LevelDesign(Content);
-            level.CreateWorld();
+            ScreenHeight = _graphics.PreferredBackBufferHeight;
+            ScreenWidth = _graphics.PreferredBackBufferWidth;
 
             base.Initialize();
         }
@@ -40,8 +46,9 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
-            // TODO: use this.Content to load your game content here
+            texture = Content.Load<Texture2D>("block_player2");
+
+            _currentState = new MenuState(this, _graphics, Content);
 
             InitializeGameObjects();
         }
@@ -50,8 +57,6 @@ namespace FallParkour
 
         private void InitializeGameObjects()
         {
-            player = new Player(texture, new PlayerMovement());
-            player.Initialize();
         }   
 
         protected override void Update(GameTime gameTime)
@@ -59,28 +64,26 @@ namespace FallParkour
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            player.Update();
+            if (_nextState != null)
+            {
+                _currentState = _nextState;
+            }
+            _currentState.Update(gameTime);
+            _currentState.PostUpdate(gameTime);
 
             base.Update(gameTime);
-        }   
+        }
+
+        public void ChangeState(State state)
+        {
+            _nextState = state;
+        }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
-            _spriteBatch.Begin();
-
-            player.Draw(_spriteBatch);
-            level.DrawWorld(_spriteBatch);
-
-            _spriteBatch.End();
-
-
-
-
+            _currentState.Draw(gameTime, _spriteBatch);
 
             base.Draw(gameTime);
         }
