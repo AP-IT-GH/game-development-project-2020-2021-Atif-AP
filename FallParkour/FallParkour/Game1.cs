@@ -45,7 +45,7 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
+            texture = Content.Load<Texture2D>("block_player2");
 
             _sprites = new List<Sprite>()
             {
@@ -58,7 +58,7 @@ namespace FallParkour
                         Up = Keys.Up,
                         Down = Keys.Down
                     },
-                    Position = new Vector2(100,100),
+                    Position = new Vector2((float) _graphics.PreferredBackBufferWidth / 2, (float) _graphics.PreferredBackBufferHeight / 2),
                     Speed = 5,
                 }
             };
