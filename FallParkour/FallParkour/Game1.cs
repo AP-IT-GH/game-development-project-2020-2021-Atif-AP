@@ -16,14 +16,13 @@ namespace FallParkour
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public static int ScreenWidth = 1920;
-        public static int ScreenHeight = 1080;
+        public static int ScreenWidth;
+        public static int ScreenHeight;
 
         private State _currentState;
         private State _nextState;
 
         public static Texture2D texture;
-        Player player;
 
         public Game1()
         {
@@ -58,8 +57,6 @@ namespace FallParkour
 
         private void InitializeGameObjects()
         {
-            player = new Player(texture, new PlayerMovement());
-            player.Initialize();
         }   
 
         protected override void Update(GameTime gameTime)
