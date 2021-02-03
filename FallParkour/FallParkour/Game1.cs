@@ -24,7 +24,7 @@ namespace FallParkour
 
         LevelDesign level;
 
-        private Texture2D texture;
+        public static Texture2D texture;
         Player player;
 
         private List<Sprite> _sprites;
@@ -43,6 +43,9 @@ namespace FallParkour
         {
             level = new LevelDesign(Content);
             level.CreateWorld();
+
+            ScreenHeight = _graphics.PreferredBackBufferHeight;
+            ScreenWidth = _graphics.PreferredBackBufferWidth;
 
             base.Initialize();
         }
@@ -86,6 +89,7 @@ namespace FallParkour
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
             if (_nextState != null)
             {
                 _currentState = _nextState;
@@ -108,15 +112,15 @@ namespace FallParkour
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _currentState.Draw(gameTime, _spriteBatch);
+            //_currentState.Draw(gameTime, _spriteBatch);
 
-            /*_spriteBatch.Begin();
+            _spriteBatch.Begin();
 
             foreach (var sprite in _sprites)
                 sprite.Draw(_spriteBatch);
             level.DrawWorld(_spriteBatch);
 
-            _spriteBatch.End();*/
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
