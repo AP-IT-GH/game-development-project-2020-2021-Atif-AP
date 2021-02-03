@@ -37,6 +37,20 @@
 /processorParam:TextureFormat=Color
 /build:blok.png
 
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont;font_24.spritefont
+
+#begin font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font.spritefont;font_12.spritefont
+
 #begin Pink_Monster_Walk_6.png
 /importer:TextureImporter
 /processor:TextureProcessor

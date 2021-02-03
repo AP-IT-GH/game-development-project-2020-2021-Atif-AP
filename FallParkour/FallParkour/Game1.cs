@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using FallParkour.Map;
 using System;
 using FallParkour.Movement;
+using FallParkour.States;
 using FallParkour.Sprites;
 using System.Collections.Generic;
 using FallParkour.Models;
@@ -14,6 +15,12 @@ namespace FallParkour
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        public static int ScreenWidth = 1920;
+        public static int ScreenHeight = 1080;
+
+        private State _currentState;
+        private State _nextState;
 
         LevelDesign level;
 
@@ -34,7 +41,6 @@ namespace FallParkour
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             level = new LevelDesign(Content);
             level.CreateWorld();
 
@@ -46,6 +52,8 @@ namespace FallParkour
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             texture = Content.Load<Texture2D>("block_player2");
+
+            _currentState = new MenuState(this, _graphics, Content);
 
             _sprites = new List<Sprite>()
             {
@@ -78,30 +86,36 @@ namespace FallParkour
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if(_nextState != null)
+            {
+                _currentState = _nextState;
 
             foreach (var sprite in _sprites)
                 sprite.Update(gameTime, _sprites);
+            _currentState.Update(gameTime);
+            _currentState.PostUpdate(gameTime);
 
             base.Update(gameTime);
-        }   
+        }
+
+        public void ChangeState(State state)
+        {
+            _nextState = state;
+        }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            _currentState.Draw(gameTime, _spriteBatch);
 
-            _spriteBatch.Begin();
+            /*_spriteBatch.Begin();
 
             foreach (var sprite in _sprites)
                 sprite.Draw(_spriteBatch);
             level.DrawWorld(_spriteBatch);
 
-            _spriteBatch.End();
-
-
-
-
+            _spriteBatch.End();*/
 
             base.Draw(gameTime);
         }
