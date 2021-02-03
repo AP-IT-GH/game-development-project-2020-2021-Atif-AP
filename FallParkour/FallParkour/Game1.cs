@@ -41,9 +41,6 @@ namespace FallParkour
 
         protected override void Initialize()
         {
-            level = new LevelDesign(Content);
-            level.CreateWorld();
-
             ScreenHeight = _graphics.PreferredBackBufferHeight;
             ScreenWidth = _graphics.PreferredBackBufferWidth;
 
@@ -57,22 +54,6 @@ namespace FallParkour
             texture = Content.Load<Texture2D>("block_player2");
 
             _currentState = new MenuState(this, _graphics, Content);
-
-            _sprites = new List<Sprite>()
-            {
-                new Hero(texture)
-                {
-                    Input = new Input()
-                    {
-                        Left = Keys.Left,
-                        Right = Keys.Right,
-                        Up = Keys.Up,
-                        Down = Keys.Down
-                    },
-                    Position = new Vector2((float) _graphics.PreferredBackBufferWidth / 4, (float) _graphics.PreferredBackBufferHeight / 2 + 225),
-                    Speed = 5,
-                }
-            };
 
             InitializeGameObjects();
         }
@@ -93,9 +74,6 @@ namespace FallParkour
             if (_nextState != null)
             {
                 _currentState = _nextState;
-
-                foreach (var sprite in _sprites)
-                    sprite.Update(gameTime, _sprites);
             }
             _currentState.Update(gameTime);
             _currentState.PostUpdate(gameTime);
@@ -112,15 +90,7 @@ namespace FallParkour
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //_currentState.Draw(gameTime, _spriteBatch);
-
-            _spriteBatch.Begin();
-
-            foreach (var sprite in _sprites)
-                sprite.Draw(_spriteBatch);
-            level.DrawWorld(_spriteBatch);
-
-            _spriteBatch.End();
+            _currentState.Draw(gameTime, _spriteBatch);
 
             base.Draw(gameTime);
         }

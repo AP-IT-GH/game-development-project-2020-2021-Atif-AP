@@ -13,23 +13,14 @@ namespace FallParkour.States
 {
     class GameState : State
     {
-        private GraphicsDevice _graphics;
-        private SpriteBatch _spriteBatch;
-
         private List<Sprite> _sprites;
         LevelDesign level;
 
-        private Texture2D texture = Game1.texture;
-
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, content)
-        {
-        }
-
-        public override void LoadContent()
         {
             _sprites = new List<Sprite>()
             {
-                new Hero(texture)
+                new Hero(Game1.texture)
                 {
                     Input = new Input()
                     {
@@ -42,27 +33,33 @@ namespace FallParkour.States
                     Speed = 5,
                 }
             };
+
+            level = new LevelDesign(content);
+            level.CreateWorld();
+        }
+
+        public override void LoadContent()
+        {
         }
 
         public override void PostUpdate(GameTime gameTime)
         {
-            throw new NotImplementedException();
         }
 
         public override void Update(GameTime gameTime)
         {
-            foreach (var sprite in _sprites)
-                sprite.Update(gameTime, _sprites);
+                foreach (var sprite in _sprites)
+                    sprite.Update(gameTime, _sprites);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            _spriteBatch.Begin();
+            spriteBatch.Begin();
             foreach (var sprite in _sprites)
-                sprite.Draw(_spriteBatch);
+                sprite.Draw(spriteBatch);
 
-            level.DrawWorld(_spriteBatch);
-            _spriteBatch.End();
+            level.DrawWorld(spriteBatch);
+            spriteBatch.End();
         }
     }
 }
