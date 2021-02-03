@@ -12,48 +12,39 @@ namespace FallParkour.States
     public class MenuState : State
     {
         private List<Component> _components;
-
-        private Texture2D menuBackGroundTexture;
+        private SpriteFont buttonFont;
 
         public MenuState(Game1 game, GraphicsDeviceManager graphics, ContentManager content)
             : base(game, content)
         {
-        }
-
-        public override void LoadContent()
-        {
             var buttonTexture = _content.Load<Texture2D>("blok");
-            var buttonFont = _content.Load<SpriteFont>("Font");
-;
+            buttonFont = _content.Load<SpriteFont>("Font");
+
+            var startGameButton = new Button(buttonTexture, buttonFont)
+            {
+                Text = "Start",
+                Position = new Vector2(300, 200),
+            };
+
+            var quitGameButton = new Button(buttonTexture, buttonFont)
+            {
+                Text = "Quit",
+                Position = new Vector2(300, 300),
+            };
 
             _components = new List<Component>()
             {
-
-        new Button(buttonTexture, buttonFont)
-        {
-          Text = "1 Player",
-          Position = new Vector2(Game1.ScreenWidth / 2, 400),
-          Click = new EventHandler(Button_1Player_Clicked),
-          //Layer = 0.1f
-        },
-        new Button(buttonTexture, buttonFont)
-        {
-          Text = "Quit",
-          Position = new Vector2(Game1.ScreenWidth / 2, 520),
-          Click = new EventHandler(Button_Quit_Clicked),
-          //Layer = 0.1f
-        },
-      };
+                startGameButton,
+                quitGameButton,
+            };
         }
 
-        private void Button_1Player_Clicked(object sender, EventArgs args)
+
+        public override void LoadContent()
         {
+
         }
 
-        private void Button_Quit_Clicked(object sender, EventArgs args)
-        {
-            _game.Exit();
-        }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
@@ -63,14 +54,15 @@ namespace FallParkour.States
 
             spriteBatch.End();
         }
+        public override void PostUpdate(GameTime gameTime)
+        {
+
+        }
+
         public override void Update(GameTime gameTime)
         {
             foreach (var component in _components)
                 component.Update(gameTime);
-        }
-        public override void PostUpdate(GameTime gameTime)
-        {
-
         }
     }
 }
