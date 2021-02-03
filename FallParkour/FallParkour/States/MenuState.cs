@@ -12,24 +12,25 @@ namespace FallParkour.States
     public class MenuState : State
     {
         private List<Component> _components;
-        private SpriteFont buttonFont;
+        private SpriteFont font_12, font_24;
 
         public MenuState(Game1 game, GraphicsDeviceManager graphics, ContentManager content)
             : base(game, content)
         {
             var buttonTexture = _content.Load<Texture2D>("blok");
-            buttonFont = _content.Load<SpriteFont>("Font");
+            font_12 = _content.Load<SpriteFont>("font_12");
+            font_24 = _content.Load<SpriteFont>("font_24");
 
-            var startGameButton = new Button(buttonTexture, buttonFont)
+            var startGameButton = new Button(buttonTexture, font_12)
             {
+                Position = new Vector2(600, 200),
                 Text = "Start",
-                Position = new Vector2(300, 200),
             };
 
-            var quitGameButton = new Button(buttonTexture, buttonFont)
+            var quitGameButton = new Button(buttonTexture, font_12)
             {
+                Position = new Vector2(600, 300),
                 Text = "Quit",
-                Position = new Vector2(300, 300),
             };
 
             _components = new List<Component>()
@@ -49,6 +50,7 @@ namespace FallParkour.States
         {
             spriteBatch.Begin();
 
+            spriteBatch.DrawString(font_24, "Fall Parkour", new Vector2(600, 100), Color.White); 
             foreach (var component in _components)
                 component.Draw(gameTime, spriteBatch);
 

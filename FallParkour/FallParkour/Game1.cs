@@ -36,7 +36,6 @@ namespace FallParkour
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             level = new LevelDesign(Content);
             level.CreateWorld();
 
@@ -48,10 +47,8 @@ namespace FallParkour
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _currentState = new MenuState(this, _graphics, Content);
-            _nextState = null;
 
             texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
-            // TODO: use this.Content to load your game content here
 
             InitializeGameObjects();
         }
@@ -78,7 +75,6 @@ namespace FallParkour
 
             _currentState.PostUpdate(gameTime);
 
-            // TODO: Add your update logic here
             player.Update();
 
             base.Update(gameTime);
@@ -93,20 +89,14 @@ namespace FallParkour
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
             _currentState.Draw(gameTime, _spriteBatch);
 
-            _spriteBatch.Begin();
+            /*_spriteBatch.Begin();
 
             player.Draw(_spriteBatch);
             level.DrawWorld(_spriteBatch);
 
-            _spriteBatch.End();
-
-
-
-
+            _spriteBatch.End();*/
 
             base.Draw(gameTime);
         }
