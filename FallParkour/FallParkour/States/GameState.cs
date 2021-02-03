@@ -48,8 +48,14 @@ namespace FallParkour.States
 
         public override void Update(GameTime gameTime)
         {
-                foreach (var sprite in _sprites)
-                    sprite.Update(gameTime, _sprites);
+            foreach (var sprite in _sprites)
+            {
+                sprite.Update(gameTime, _sprites);
+                if (sprite.Position.X <= 200 || sprite.Position.X > 800)
+                {
+
+                }
+            }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
