@@ -11,6 +11,8 @@ namespace FallParkour.States
     {
         protected Game1 _game;
 
+        protected GraphicsDevice _graphicsDevice;
+
         protected ContentManager _content;
 
         public State(Game1 game, ContentManager content)
@@ -24,6 +26,14 @@ namespace FallParkour.States
         public abstract void Update(GameTime gameTime);
 
         public abstract void PostUpdate(GameTime gameTime);
+        public State(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
+        {
+            _game = game;
+
+            _graphicsDevice = graphicsDevice;
+
+            _content = content;
+        }
 
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
     }

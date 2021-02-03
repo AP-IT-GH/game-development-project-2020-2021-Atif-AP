@@ -9,7 +9,7 @@ namespace FallParkour.States
 {
     class GameState : State
     {
-        public GameState(Game1 game, ContentManager content) : base(game, content)
+        public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, content)
         {
         }
 
