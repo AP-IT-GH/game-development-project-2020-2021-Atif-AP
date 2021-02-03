@@ -6,14 +6,11 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using FallParkour.Interfaces;
 
 namespace FallParkour.Sprites
 {
     class Hero : Sprite
     {
-        IInputReader inputReader;
-
         public Hero(Texture2D texture)
       : base(texture)
         {

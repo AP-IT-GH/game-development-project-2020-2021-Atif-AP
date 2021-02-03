@@ -51,9 +51,9 @@ namespace FallParkour.States
             foreach (var sprite in _sprites)
             {
                 sprite.Update(gameTime, _sprites);
-                if (sprite.Position.X <= 200 || sprite.Position.X > 800)
+                if (sprite.Position.Y >= 600 || sprite.Position.Y < 0 || sprite.Position.X <= 0 || sprite.Position.X >= 1280)
                 {
-
+                    sprite.Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
                 }
             }
         }
