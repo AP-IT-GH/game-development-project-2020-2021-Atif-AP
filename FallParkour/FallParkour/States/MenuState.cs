@@ -22,9 +22,9 @@ namespace FallParkour.States
 
         public override void LoadContent()
         {
-            var buttonTexture = _content.Load<Texture2D>("Controls/Button");
-            var buttonFont = _content.Load<SpriteFont>("ButtonFonts/Font");
-            menuBackGroundTexture = _content.Load<Texture2D>("Background/MainMenu");
+            var buttonTexture = _content.Load<Texture2D>("blok");
+            var buttonFont = _content.Load<SpriteFont>("Font");
+;
 
             _components = new List<Component>()
             {
@@ -54,7 +54,15 @@ namespace FallParkour.States
         {
             _game.Exit();
         }
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
 
+            foreach (var component in _components)
+                component.Draw(gameTime, spriteBatch);
+
+            spriteBatch.End();
+        }
         public override void Update(GameTime gameTime)
         {
             foreach (var component in _components)
@@ -63,17 +71,6 @@ namespace FallParkour.States
         public override void PostUpdate(GameTime gameTime)
         {
 
-        }
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            spriteBatch.Begin();
-
-            spriteBatch.Draw(menuBackGroundTexture, new Vector2(0, 0), Color.White);
-
-            foreach (var component in _components)
-                component.Draw(gameTime, spriteBatch);
-
-            spriteBatch.End();
         }
     }
 }
