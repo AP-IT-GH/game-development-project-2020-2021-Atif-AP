@@ -22,12 +22,8 @@ namespace FallParkour
         private State _currentState;
         private State _nextState;
 
-        LevelDesign level;
-
         public static Texture2D texture;
         Player player;
-
-        private List<Sprite> _sprites;
 
         public Game1()
         {
