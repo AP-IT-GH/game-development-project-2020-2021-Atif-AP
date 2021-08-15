@@ -15,6 +15,7 @@ namespace FallParkour.States
     {
         private List<Sprite> _sprites;
         LevelDesign level;
+        Enemy enemy = new Enemy(Game1.enemyTexture);
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, content)
         {
@@ -65,6 +66,8 @@ namespace FallParkour.States
                 sprite.Draw(spriteBatch);
 
             level.DrawWorld(spriteBatch);
+            enemy.Draw(spriteBatch);
+
             spriteBatch.End();
         }
     }

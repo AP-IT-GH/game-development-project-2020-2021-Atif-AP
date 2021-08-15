@@ -23,6 +23,7 @@ namespace FallParkour
         private State _nextState;
 
         public static Texture2D texture;
+        public static Texture2D enemyTexture;
 
         public Game1()
         {
@@ -47,6 +48,7 @@ namespace FallParkour
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             texture = Content.Load<Texture2D>("block_player2");
+            enemyTexture = Content.Load<Texture2D>("block_player2");
 
             _currentState = new MenuState(this, _graphics, Content);
 
