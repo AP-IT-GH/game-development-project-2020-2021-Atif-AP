@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="FallParkour2" tilewidth="32" tileheight="32" tilecount="180" columns="18">
+  <image source="Tileset.png" width="576" height="320"/>
+ </tileset>
+ <layer id="1" name="Tilelaag 1" width="10" height="10">
+  <data encoding="csv">
+112,112,112,112,112,112,112,112,112,112,
+112,112,112,112,112,112,112,112,112,112,
+112,112,112,112,112,112,112,112,112,112,
+112,112,112,112,112,112,112,112,112,112,
+112,112,112,112,112,112,112,112,112,112,
+112,112,112,112,112,112,112,112,112,112,
+112,112,112,112,112,112,112,112,112,112,
+73,74,74,74,74,74,74,74,74,75,
+91,92,92,92,92,92,92,92,92,93,
+109,110,110,110,110,110,110,110,110,111
+</data>
+ </layer>
+</map>
