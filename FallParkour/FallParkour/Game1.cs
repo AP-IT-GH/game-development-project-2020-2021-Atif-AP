@@ -8,20 +8,11 @@ using FallParkour.States;
 using FallParkour.Sprites;
 using System.Collections.Generic;
 using FallParkour.Models;
-using TiledSharp;
 
 namespace FallParkour
 {
     public class Game1 : Game
     {
-        TmxMap map;
-        Texture2D tileset;
-
-        int tileWidth;
-        int tileHeight;
-        int tilesetTilesWide;
-        int tilesetTilesHigh;
-
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -53,15 +44,6 @@ namespace FallParkour
 
         protected override void LoadContent()
         {
-            map = new TmxMap("Content/FallParkour2.tmx");
-            tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
-
-            tileWidth = map.Tilesets[0].TileWidth;
-            tileHeight = map.Tilesets[0].TileHeight;
-
-            tilesetTilesWide = tileset.Width / tileWidth;
-            tilesetTilesHigh = tileset.Height / tileHeight;
-
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             texture = Content.Load<Texture2D>("block_player2");
@@ -102,33 +84,6 @@ namespace FallParkour
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _currentState.Draw(gameTime, _spriteBatch);
-            _spriteBatch.Begin();
-
-            for (var i = 0; i < map.Layers[0].Tiles.Count; i++)
-            {
-                int gid = map.Layers[0].Tiles[i].Gid;
-
-                // Empty tile, do nothing
-                if (gid == 0)
-                {
-
-                }
-                else
-                {
-                    int tileFrame = gid - 1;
-                    int column = tileFrame % tilesetTilesWide;
-                    int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
-
-                    float x = (i % map.Width) * map.TileWidth;
-                    float y = (float)Math.Floor(i / (double)map.Width) * map.TileHeight;
-
-                    Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);
-
-                    _spriteBatch.Draw(tileset, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
-                }
-            }
-
-            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

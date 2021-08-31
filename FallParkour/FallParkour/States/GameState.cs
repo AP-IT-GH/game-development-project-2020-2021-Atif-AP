@@ -35,7 +35,7 @@ namespace FallParkour.States
             };
 
             level = new LevelDesign(content);
-            level.CreateWorld();
+            level.LoadContent();
         }
 
         public override void LoadContent()
