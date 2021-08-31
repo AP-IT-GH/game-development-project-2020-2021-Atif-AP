@@ -11,10 +11,17 @@ namespace FallParkour.Sprites
 {
     class Hero : Sprite
     {
+        Animatie animatie;
         public Hero(Texture2D texture)
       : base(texture)
         {
-
+            animatie = new Animatie();
+            animatie.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(32, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(64, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(96, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(128, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(160, 0, 32, 32)));
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -37,6 +44,11 @@ namespace FallParkour.Sprites
 
             Position += Velocity;
             Velocity = Vector2.Zero;
+
+            if (Position !=  Position + Velocity)
+            {
+                animatie.Update();
+            }
         }
 
         private void Move()

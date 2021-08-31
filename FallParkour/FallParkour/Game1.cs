@@ -46,7 +46,7 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            texture = Content.Load<Texture2D>("block_player2");
+            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
 
             _currentState = new MenuState(this, _graphics, Content);
 
