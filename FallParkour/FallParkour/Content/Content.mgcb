@@ -37,9 +37,6 @@
 /processorParam:TextureFormat=Color
 /build:blok.png
 
-#begin FallParkour2.tmx
-/copy:FallParkour2.tmx
-
 #begin font_12.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -53,6 +50,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:font_64.spritefont
+
+#begin Level_1.tmx
+/copy:Level_1.tmx
 
 #begin Pink_Monster_Walk_6.png
 /importer:TextureImporter

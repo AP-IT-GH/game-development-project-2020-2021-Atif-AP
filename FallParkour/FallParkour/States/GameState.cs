@@ -56,6 +56,8 @@ namespace FallParkour.States
                     sprite.Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
                 }
             }
+
+            level.Update(_sprites[0]);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
