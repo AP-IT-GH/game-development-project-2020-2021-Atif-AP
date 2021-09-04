@@ -33,9 +33,9 @@ namespace FallParkour.Map
         {
         }
 
-        public void LoadContent()
+        public void LoadContent(string name)
         {
-            map = new TmxMap("Content/Level_1.tmx");
+            map = new TmxMap("Content/"+name+".tmx");
             tileset = content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
 
             tileWidth = map.Tilesets[0].TileWidth;
@@ -44,10 +44,10 @@ namespace FallParkour.Map
             tilesetTilesWide = tileset.Width / tileWidth;
             tilesetTilesHigh = tileset.Height / tileHeight;
 
-            foreach(var c in map.ObjectGroups[0].Objects)
+            /*foreach(var c in map.ObjectGroups[0].Objects)
             {
                 collisionObjects.Add(new Rectangle((int)c.X, (int)c.Y, (int)c.Width, (int)c.Height));
-            }
+            }*/
         }
 
         public void Update(Sprite sprite)

@@ -54,6 +54,9 @@
 #begin Level_1.tmx
 /copy:Level_1.tmx
 
+#begin Level_2.tmx
+/copy:Level_2.tmx
+
 #begin Pink_Monster_Walk_6.png
 /importer:TextureImporter
 /processor:TextureProcessor

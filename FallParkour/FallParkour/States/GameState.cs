@@ -15,6 +15,7 @@ namespace FallParkour.States
     {
         private List<Sprite> _sprites;
         LevelDesign level;
+        GraphicsDeviceManager graphics;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, content)
         {
@@ -35,7 +36,7 @@ namespace FallParkour.States
             };
 
             level = new LevelDesign(content);
-            level.LoadContent();
+            level.LoadContent("Level_1");
         }
 
         public override void LoadContent()
@@ -55,7 +56,17 @@ namespace FallParkour.States
                 {
                     sprite.Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
                 }
+
+                if (sprite.Position.Y > 210 && sprite.Position.Y < 226)
+                {
+                    if (sprite.Position.X >= 640 && sprite.Position.X <= 656)
+                    {
+                        level.LoadContent("Level_2");
+                    }
+                }
             }
+
+
 
             level.Update(_sprites[0]);
         }
