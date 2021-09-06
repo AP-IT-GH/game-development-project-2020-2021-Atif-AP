@@ -75,5 +75,9 @@ namespace FallParkour.States
             foreach (var component in _components)
                 component.Update(gameTime);
         }
+
+        public override void PostUpdate(GameTime gameTime)
+        {
+        }
     }
 }

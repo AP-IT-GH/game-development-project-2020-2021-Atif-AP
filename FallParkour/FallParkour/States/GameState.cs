@@ -57,7 +57,7 @@ namespace FallParkour.States
                     sprite.Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
                 }
 
-                if (sprite.Position.Y > 210 && sprite.Position.Y < 226 && sprite.Position.X >= 640 && sprite.Position.X <= 656)
+                if (sprite.Position.Y > 210 && sprite.Position.Y < 242 && sprite.Position.X >= 640 && sprite.Position.X <= 672)
                 {
                     level.LoadContent("Level_2");
                     flagNewLevel = true;
@@ -65,10 +65,11 @@ namespace FallParkour.States
 
                 if(flagNewLevel == true)
                 {
-                    if (sprite.Position.Y > 0 && sprite.Position.Y < 200 && sprite.Position.X >= 0 && sprite.Position.X <= 720)
+                    if (sprite.Position.Y > 340 && sprite.Position.Y < 370 && sprite.Position.X > 1030 && sprite.Position.X < 1050)
                     {
                         _game.ChangeState(new EndGameState(_game, _graphicsDevice, _content));
                         flagNewLevel = false;
+
                     }
                 }
             }
@@ -83,6 +84,10 @@ namespace FallParkour.States
 
             level.DrawWorld(spriteBatch);
             spriteBatch.End();
+        }
+
+        public override void PostUpdate(GameTime gameTime)
+        {
         }
     }
 }
