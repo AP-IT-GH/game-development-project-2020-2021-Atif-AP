@@ -31,12 +31,12 @@ namespace FallParkour.States
                         Up = Keys.Up,
                         Down = Keys.Down
                     },
-                    Position = new Vector2((float) Game1.ScreenWidth / 4, (float) Game1.ScreenHeight / 2 + 225),
+                    Position = new Vector2(200, 545),
                     Speed = 5,
                 },
                 new Enemy(Game1.textureEnemy)
                 {
-                    Position = new Vector2(200  ,300)
+                    Position = new Vector2(300, 385)
                 }
             };
             level = new LevelDesign(content);
@@ -46,19 +46,15 @@ namespace FallParkour.States
         public override void LoadContent()
         {
             level.LoadContent("Level_1");
-            if(flagNewLevel == true)
-            {
-                _sprites[0].Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 30);
-            }
         }
 
         public void MoveSprites()
         {
             if (flagMove == true)
             {
-                _sprites[0].Position.Y = 100;
+                _sprites[0].Position.Y = 545;
                 _sprites[0].Position.X = 200;
-                _sprites[1].Position.Y = 100;
+                _sprites[1].Position.Y = 385;
                 _sprites[1].Position.X = 300;
             }
             flagMove = false;
