@@ -16,6 +16,7 @@ namespace FallParkour.States
         private List<Sprite> _sprites;
         LevelDesign level;
         private bool flagNewLevel = false;
+        private bool flagMove = false;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, content)
         {
@@ -35,7 +36,7 @@ namespace FallParkour.States
                 },
                 new Enemy(Game1.textureEnemy)
                 {
-                    Position = new Vector2(200,300)
+                    Position = new Vector2(200  ,300)
                 }
             };
             level = new LevelDesign(content);
@@ -51,32 +52,48 @@ namespace FallParkour.States
             }
         }
 
+        public void MoveSprites()
+        {
+            if (flagMove == true)
+            {
+                _sprites[0].Position.Y = 100;
+                _sprites[0].Position.X = 200;
+                _sprites[1].Position.Y = 100;
+                _sprites[1].Position.X = 300;
+            }
+            flagMove = false;
+        }
+
         public override void Update(GameTime gameTime)
         {
             foreach (var sprite in _sprites)
             {
                 sprite.Update(gameTime, _sprites);
-                if (sprite.Position.Y >= 600 || sprite.Position.Y < 0 || sprite.Position.X < 0 || sprite.Position.X >= 1280)
-                {
-                    sprite.Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
-                }
+            }
 
-                if (sprite.Position.Y > 210 && sprite.Position.Y < 242 && sprite.Position.X >= 640 && sprite.Position.X <= 672)
-                {
-                    level.LoadContent("Level_2");
-                    flagNewLevel = true;
-                }
+            if (_sprites[0].Position.Y >= 600 || _sprites[0].Position.Y < 0 || _sprites[0].Position.X < 0 || _sprites[0].Position.X >= 1280)
+            {
+                _sprites[0].Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
+            }
 
-                if(flagNewLevel == true)
-                {
-                    if (sprite.Position.Y > 340 && sprite.Position.Y < 370 && sprite.Position.X > 1030 && sprite.Position.X < 1050)
-                    {
-                        _game.ChangeState(new EndGameState(_game, _graphicsDevice, _content));
-                        flagNewLevel = false;
+            if (_sprites[0].Position.Y > 210 && _sprites[0].Position.Y < 242 && _sprites[0].Position.X >= 640 && _sprites[0].Position.X <= 672)
+            {
+                level.LoadContent("Level_2");
+                flagNewLevel = true;
+                flagMove = true;
+                MoveSprites();
+            }
 
-                    }
+            if (flagNewLevel == true)
+            {
+                if (_sprites[0].Position.Y > 340 && _sprites[0].Position.Y < 370 && _sprites[0].Position.X > 1030 && _sprites[0].Position.X < 1050)
+                {
+                    _game.ChangeState(new EndGameState(_game, _graphicsDevice, _content));
+                    flagNewLevel = false;
+
                 }
             }
+
             level.Update(_sprites[0]);
         }
 
