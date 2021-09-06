@@ -46,7 +46,7 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            texture = Content.Load<Texture2D>("block_player2");
+            texture = Content.Load<Texture2D>("Pink_Monster_Walk_6");
 
             _currentState = new MenuState(this, _graphics, Content);
 
@@ -61,8 +61,6 @@ namespace FallParkour
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             if (_nextState != null)
             {

@@ -51,6 +51,12 @@
 /processorParam:TextureFormat=Compressed
 /build:font_64.spritefont
 
+#begin Level_1.tmx
+/copy:Level_1.tmx
+
+#begin Level_2.tmx
+/copy:Level_2.tmx
+
 #begin Pink_Monster_Walk_6.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -62,4 +68,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Pink_Monster_Walk_6.png
+
+#begin Tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tileset.png
 
