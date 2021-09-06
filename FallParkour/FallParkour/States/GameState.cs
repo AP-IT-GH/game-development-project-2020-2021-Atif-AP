@@ -21,7 +21,7 @@ namespace FallParkour.States
         {
             _sprites = new List<Sprite>()
             {
-                new Hero(Game1.texture)
+                new Hero(Game1.textureHero)
                 {
                     Input = new Input()
                     {
@@ -32,6 +32,10 @@ namespace FallParkour.States
                     },
                     Position = new Vector2((float) Game1.ScreenWidth / 4, (float) Game1.ScreenHeight / 2 + 225),
                     Speed = 5,
+                },
+                new Enemy(Game1.textureEnemy)
+                {
+                    Position = new Vector2(200,300)
                 }
             };
             level = new LevelDesign(content);

@@ -18,7 +18,7 @@ namespace FallParkour
         public Color Colour = Color.White;
         public float Speed;
         public Input Input;
-        Animatie animatie;
+        public Animatie animatie;
 
         public Rectangle Rectangle
         {
