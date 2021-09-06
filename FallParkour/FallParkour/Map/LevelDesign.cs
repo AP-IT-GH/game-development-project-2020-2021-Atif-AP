@@ -13,7 +13,7 @@ namespace FallParkour.Map
     {
         private ContentManager content;
 
-        public TmxMap map;
+        private TmxMap map;
         Texture2D tileset;
 
         int tileWidth;
@@ -21,6 +21,12 @@ namespace FallParkour.Map
         int tilesetTilesWide;
         int tilesetTilesHigh;
         private List<Rectangle> collisionObjects;
+
+        public TmxMap Map
+        {
+            get { return map; }
+            set { map = value; }
+        }
 
         public LevelDesign (ContentManager content)
         {

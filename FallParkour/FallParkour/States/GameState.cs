@@ -15,7 +15,7 @@ namespace FallParkour.States
     {
         private List<Sprite> _sprites;
         LevelDesign level;
-        GraphicsDeviceManager graphics;
+        private bool flagNewLevel = false;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, content)
         {
@@ -34,17 +34,17 @@ namespace FallParkour.States
                     Speed = 5,
                 }
             };
-
             level = new LevelDesign(content);
-            level.LoadContent("Level_1");
+            LoadContent();
         }
 
         public override void LoadContent()
         {
-        }
-
-        public override void PostUpdate(GameTime gameTime)
-        {
+            level.LoadContent("Level_1");
+            if(flagNewLevel == true)
+            {
+                _sprites[0].Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 30);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -57,17 +57,21 @@ namespace FallParkour.States
                     sprite.Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
                 }
 
-                if (sprite.Position.Y > 210 && sprite.Position.Y < 226)
+                if (sprite.Position.Y > 210 && sprite.Position.Y < 226 && sprite.Position.X >= 640 && sprite.Position.X <= 656)
                 {
-                    if (sprite.Position.X >= 640 && sprite.Position.X <= 656)
+                    level.LoadContent("Level_2");
+                    flagNewLevel = true;
+                }
+
+                if(flagNewLevel == true)
+                {
+                    if (sprite.Position.Y > 0 && sprite.Position.Y < 200 && sprite.Position.X >= 0 && sprite.Position.X <= 720)
                     {
-                        level.LoadContent("Level_2");
+                        _game.ChangeState(new EndGameState(_game, _graphicsDevice, _content));
+                        flagNewLevel = false;
                     }
                 }
             }
-
-
-
             level.Update(_sprites[0]);
         }
 
