@@ -3,47 +3,49 @@
  <tileset firstgid="1" name="Tileset" tilewidth="32" tileheight="32" tilecount="60" columns="10">
   <image source="Tileset.png" width="320" height="192"/>
   <tile id="0">
-   <objectgroup name="obstacles" draworder="index" id="2">
-     <object id="1" x="0" y="0" width="32" height="32"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
   <tile id="1">
-   <objectgroup name="Collision" draworder="index" id="2">
-     <object id="1" x="1" y="0" width="32" height="32"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="1" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
   <tile id="2">
-   <objectgroup name="Collision" draworder="index" id="2">
-     <object id="1" x="0" y="1" width="32" height="32"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="1" width="32" height="32"/>
    </objectgroup>
   </tile>
   <tile id="10">
-   <objectgroup name="Collision" draworder="index" id="2">
-     <object id="1" x="0" y="0" width="32" height="32"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
   <tile id="12">
-   <objectgroup name="Collision" draworder="index" id="2">
-     <object id="1" x="0" y="0" width="32" height="32"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
   <tile id="20">
-   <objectgroup name="Collision" draworder="index" id="2">
-     <object id="1" x="0" y="0" width="32" height="32"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
   <tile id="21">
-   <objectgroup name="Collision" draworder="index" id="2">
-     <object id="1" x="0" y="0" width="32" height="32"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
     <object id="2" x="0" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
   <tile id="22">
-   <objectgroup name="Collision" draworder="index" id="2">
-     <properties>
-       <property name="collision" type="bool" value="true"/>
-     </properties>
-     <object id="1" x="0" y="0" width="32" height="32"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="24">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
  </tileset>
