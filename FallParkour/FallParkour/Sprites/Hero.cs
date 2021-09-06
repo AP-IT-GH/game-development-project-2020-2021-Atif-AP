@@ -11,7 +11,6 @@ namespace FallParkour.Sprites
 {
     class Hero : Sprite
     {
-        Animatie animatie;
         public Hero(Texture2D texture)
       : base(texture)
         {
