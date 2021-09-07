@@ -15,12 +15,14 @@ namespace FallParkour.States
     {
         private List<Sprite> _sprites;
         LevelDesign level;
+        private bool flagNewLevel = false;
+        private bool flagMove = false;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, content)
         {
             _sprites = new List<Sprite>()
             {
-                new Hero(Game1.texture)
+                new Hero(Game1.textureHero)
                 {
                     Input = new Input()
                     {
@@ -29,21 +31,33 @@ namespace FallParkour.States
                         Up = Keys.Up,
                         Down = Keys.Down
                     },
-                    Position = new Vector2((float) Game1.ScreenWidth / 4, (float) Game1.ScreenHeight / 2 + 225),
+                    Position = new Vector2(200, 545),
                     Speed = 5,
+                },
+                new Enemy(Game1.textureEnemy)
+                {
+                    Position = new Vector2(300, 385)
                 }
             };
-
             level = new LevelDesign(content);
-            level.CreateWorld();
+            LoadContent();
         }
 
         public override void LoadContent()
         {
+            level.LoadContent("Level_1");
         }
 
-        public override void PostUpdate(GameTime gameTime)
+        public void MoveSprites()
         {
+            if (flagMove == true)
+            {
+                _sprites[0].Position.Y = 545;
+                _sprites[0].Position.X = 200;
+                _sprites[1].Position.Y = 385;
+                _sprites[1].Position.X = 300;
+            }
+            flagMove = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -51,11 +65,32 @@ namespace FallParkour.States
             foreach (var sprite in _sprites)
             {
                 sprite.Update(gameTime, _sprites);
-                if (sprite.Position.Y >= 600 || sprite.Position.Y < 0 || sprite.Position.X < 0 || sprite.Position.X >= 1280)
+            }
+
+            if (_sprites[0].Position.Y >= 600 || _sprites[0].Position.Y < 0 || _sprites[0].Position.X < 0 || _sprites[0].Position.X >= 1280)
+            {
+                _sprites[0].Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
+            }
+
+            if (_sprites[0].Position.Y > 210 && _sprites[0].Position.Y < 242 && _sprites[0].Position.X >= 640 && _sprites[0].Position.X <= 672)
+            {
+                level.LoadContent("Level_2");
+                flagNewLevel = true;
+                flagMove = true;
+                MoveSprites();
+            }
+
+            if (flagNewLevel == true)
+            {
+                if (_sprites[0].Position.Y > 340 && _sprites[0].Position.Y < 370 && _sprites[0].Position.X > 1030 && _sprites[0].Position.X < 1050)
                 {
-                    sprite.Position = new Vector2((float)Game1.ScreenWidth / 4, (float)Game1.ScreenHeight / 2 + 225);
+                    _game.ChangeState(new EndGameState(_game, _graphicsDevice, _content));
+                    flagNewLevel = false;
+
                 }
             }
+
+            level.Update(_sprites[0]);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -66,6 +101,10 @@ namespace FallParkour.States
 
             level.DrawWorld(spriteBatch);
             spriteBatch.End();
+        }
+
+        public override void PostUpdate(GameTime gameTime)
+        {
         }
     }
 }

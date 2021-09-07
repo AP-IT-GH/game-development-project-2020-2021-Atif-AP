@@ -22,7 +22,8 @@ namespace FallParkour
         private State _currentState;
         private State _nextState;
 
-        public static Texture2D texture;
+        public static Texture2D textureHero;
+        public static Texture2D textureEnemy;
 
         public Game1()
         {
@@ -46,7 +47,8 @@ namespace FallParkour
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            texture = Content.Load<Texture2D>("block_player2");
+            textureHero = Content.Load<Texture2D>("Pink_Monster_Walk_6");
+            textureEnemy = Content.Load<Texture2D>("Dude_Monster_Walk_6");
 
             _currentState = new MenuState(this, _graphics, Content);
 
@@ -61,8 +63,6 @@ namespace FallParkour
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             if (_nextState != null)
             {

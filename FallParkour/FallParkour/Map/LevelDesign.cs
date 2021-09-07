@@ -5,29 +5,27 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TiledSharp;
 
 namespace FallParkour.Map
 {
     class LevelDesign
     {
-        public Texture2D texture;
-        private Blok[,] blokArray = new Blok[11, 10];
         private ContentManager content;
 
-        public byte[,] tileArray = new Byte[,]
+        private TmxMap map;
+        Texture2D tileset;
+
+        int tileWidth;
+        int tileHeight;
+        int tilesetTilesWide;
+        int tilesetTilesHigh;
+
+        public TmxMap Map
         {
-            {0,0,0,0,0,0,0,0,0,0 },
-            {0,1,0,0,0,0,0,0,0,0 },
-            {0,0,0,1,0,0,1,0,0,0 },
-            {0,0,0,0,0,0,0,0,0,0 },
-            {0,1,0,0,1,1,0,0,1,0 },
-            {0,0,0,0,0,0,0,0,0,0 },
-            {0,0,1,0,1,0,1,1,0,0 },
-            {0,0,0,0,0,0,0,0,0,0 },
-            {0,1,0,0,1,1,1,0,1,0 },
-            {0,0,0,0,0,0,0,0,0,0 },
-            {0,1,1,1,1,1,1,1,1,0 },
-        };
+            get { return map; }
+            set { map = value; }
+        }
 
         public LevelDesign (ContentManager content)
         {
@@ -38,33 +36,47 @@ namespace FallParkour.Map
 
         private void InitializeContent()
         {
-            texture = content.Load<Texture2D>("blok");
         }
 
-        public void CreateWorld()
+        public void LoadContent(string name)
         {
-            for (int x = 0; x < 11; x++)
-            {
-                for (int y = 0; y < 10; y++)
-                {
-                    if (tileArray[x, y] == 1)
-                    {
-                        blokArray[x, y] = new Blok(texture, new Vector2(y * 128, x * 64));
-                    }
-                }
-            }
+            map = new TmxMap("Content/"+name+".tmx");
+            tileset = content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
+
+            tileWidth = map.Tilesets[0].TileWidth;
+            tileHeight = map.Tilesets[0].TileHeight;
+
+            tilesetTilesWide = tileset.Width / tileWidth;
+            tilesetTilesHigh = tileset.Height / tileHeight;
+        }
+
+        public void Update(Sprite sprite)
+        {
         }
 
         public void DrawWorld(SpriteBatch spriteBatch)
         {
-            for (int x = 0; x < 11; x++)
+            for (var i = 0; i < map.Layers[0].Tiles.Count; i++)
             {
-                for (int y = 0; y < 10; y++)
+                int gid = map.Layers[0].Tiles[i].Gid;
+
+                // Empty tile, do nothing
+                if (gid == 0)
                 {
-                    if (blokArray[x, y] != null)
-                    {
-                        blokArray[x, y].Draw(spriteBatch);
-                    }
+
+                }
+                else
+                {
+                    int tileFrame = gid - 1;
+                    int column = tileFrame % tilesetTilesWide;
+                    int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
+
+                    float x = (i % map.Width) * map.TileWidth;
+                    float y = (float)Math.Floor(i / (double)map.Width) * map.TileHeight;
+
+                    Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);
+
+                    spriteBatch.Draw(tileset, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
                 }
             }
         }
