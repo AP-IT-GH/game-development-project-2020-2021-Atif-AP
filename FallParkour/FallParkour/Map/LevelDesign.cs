@@ -20,7 +20,6 @@ namespace FallParkour.Map
         int tileHeight;
         int tilesetTilesWide;
         int tilesetTilesHigh;
-        private List<Rectangle> collisionObjects;
 
         public TmxMap Map
         {
@@ -49,23 +48,10 @@ namespace FallParkour.Map
 
             tilesetTilesWide = tileset.Width / tileWidth;
             tilesetTilesHigh = tileset.Height / tileHeight;
-
-            /*foreach(var c in map.ObjectGroups[0].Objects)
-            {
-                collisionObjects.Add(new Rectangle((int)c.X, (int)c.Y, (int)c.Width, (int)c.Height));
-            }*/
         }
 
         public void Update(Sprite sprite)
         {
-            bool IsCollisionTile()
-            {
-                foreach (Rectangle rect in collisionObjects)
-                    if (rect.Intersects(sprite.Rectangle))
-                        return true;
-
-                return false;
-            }
         }
 
         public void DrawWorld(SpriteBatch spriteBatch)
