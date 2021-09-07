@@ -17,6 +17,7 @@ namespace FallParkour.States
         LevelDesign level;
         private bool flagNewLevel = false;
         private bool flagMove = false;
+        private bool flagDeath = false;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content) : base(game, content)
         {
@@ -60,6 +61,24 @@ namespace FallParkour.States
             flagMove = false;
         }
 
+        public void Death()
+        {
+            if (flagNewLevel == true)
+            {
+                if (_sprites[0].Position.Y >= 370 && _sprites[0].Position.Y <= 402 && _sprites[0].Position.X >= 300 && _sprites[0].Position.X <= 332)
+                {
+                    _sprites[0].Position.Y = 545;
+                    _sprites[0].Position.X = 200;
+                }
+            }
+            if (_sprites[0].Position.Y >= 370 && _sprites[0].Position.Y <= 402 && _sprites[0].Position.X >= 300 && _sprites[0].Position.X <= 332)
+            {
+                _sprites[0].Position.Y = 545;
+                _sprites[0].Position.X = 200;
+            }
+            
+        }
+
         public override void Update(GameTime gameTime)
         {
             foreach (var sprite in _sprites)
@@ -89,6 +108,7 @@ namespace FallParkour.States
 
                 }
             }
+            Death();
 
             level.Update(_sprites[0]);
         }
